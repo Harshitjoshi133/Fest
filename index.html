@@ -9,23 +9,20 @@
 </head>
 <body>
     <header>
-        <h1>Frontend Face-Off</h1>
-        <p>Organized by Coding Club | 25th April | Birla Institute of Applied Sciences</p>
-        
-        <!-- Logo Section -->
-        <section class="logo-section">
-          <div class="logo-container">
-            <img src="images/Birla_Institute_of_Applied_Sciences_logo.jpg" alt="Birla Institute of Applied Sciences Logo" class="logo left" />
-            <img src="images/cclogo.jpg" alt="Coding Club Logo" class="logo right" />
-          </div>
-        </section>
-      </header>
+        <div class="header-content">
+            <img src="images/Birla_Institute_of_Applied_Sciences_logo.jpg" alt="Birla Institute of Applied Sciences Logo" class="logo" />
+            <div class="title-container">
+                <h1>Frontend Face-Off</h1>
+                <p>Organized by Coding Club | 25th April | Birla Institute of Applied Sciences</p>
+            </div>
+            <img src="images/cclogo.jpg" alt="Coding Club Logo" class="logo" />
+        </div>
+    </header>
       
-      
-  
   <section class="section">
     <h2>⏱️ Countdown Timer</h2>
-    <p>The challenge ends in: <span id="countdown" style="font-weight: bold; color: #ffb347;"></span></p>
+    <p>The challenge ends in:</p>
+    <div id="countdown">00:00:00</div>
   </section>
   
   <section class="section">
@@ -41,7 +38,7 @@
     <h3>✅ Checklist / Features to Implement (10 Checkpoints)</h3>
     <ol>
       <li><strong>Header Section with Branding:</strong> Logo or app name, and nav links (Home, Explore, Contact)</li>
-      <li><strong>Hero Section:</strong> Tagline (e.g., "Discover the taste of your neighborhood!") with a CTA like “Explore Now.”</li>
+      <li><strong>Hero Section:</strong> Tagline (e.g., "Discover the taste of your neighborhood!") with a CTA like "Explore Now."</li>
       <li><strong>Search Bar:</strong> Search for food or restaurants (bonus: city/area filtering)</li>
       <li><strong>Cuisine Categories:</strong> Popular cuisines shown as clickable cards</li>
       <li><strong>Sorting Feature:</strong> Sort by rating, price, delivery time</li>
@@ -112,7 +109,7 @@
 </body>
 <script>
     const countdownElement = document.getElementById("countdown");
-    const TOTAL_TIME = 2 * 60 * 60; // 2.5 hours = 9000 seconds (adjust if needed)
+    const TOTAL_TIME = 2 * 60 * 60; // 2 hours = 7200 seconds
   
     let startTime = localStorage.getItem("frontend-faceoff-start-time");
   
@@ -135,6 +132,7 @@
           `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
       } else {
         countdownElement.textContent = "Time's Up!";
+        countdownElement.classList.add("times-up");
         clearInterval(timer);
       }
     }

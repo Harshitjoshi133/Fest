@@ -210,6 +210,24 @@ body {
     font-size: 0.9rem;
   }
 
+  footer p:first-child {
+    margin-bottom: 0.8rem;
+  }
+
+  footer p:last-child {
+    color: #ffb347;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-top: 0.8rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    animation: creditPulse 3s infinite ease-in-out;
+  }
+
+  @keyframes creditPulse {
+    0%, 100% { opacity: 0.9; }
+    50% { opacity: 1; transform: scale(1.02); }
+  }
+
   /* Responsive Design */
   @media (max-width: 768px) {
     header {

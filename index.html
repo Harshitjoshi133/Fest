@@ -111,31 +111,108 @@
 <script>
     const countdownElement = document.getElementById("countdown");
     const TOTAL_TIME = 2 * 60 * 60; // 2 hours = 7200 seconds
+    const EXTENSION_TIME = 20 * 60; // 20 minutes in seconds
   
     let startTime = localStorage.getItem("frontend-faceoff-start-time");
+    let extensionAdded = localStorage.getItem("extension-added") === "true";
   
     if (!startTime) {
       startTime = Date.now();
       localStorage.setItem("frontend-faceoff-start-time", startTime);
+      localStorage.setItem("extension-added", "false");
+    }
+  
+    function createPopup(message) {
+      // Create popup container
+      const popup = document.createElement("div");
+      popup.style.position = "fixed";
+      popup.style.top = "50%";
+      popup.style.left = "50%";
+      popup.style.transform = "translate(-50%, -50%)";
+      popup.style.backgroundColor = "rgba(30, 58, 72, 0.95)";
+      popup.style.padding = "2rem";
+      popup.style.borderRadius = "10px";
+      popup.style.boxShadow = "0 0 30px rgba(0, 0, 0, 0.5)";
+      popup.style.zIndex = "1000";
+      popup.style.textAlign = "center";
+      popup.style.animation = "popupAppear 0.5s forwards";
+      
+      // Create message
+      const messageEl = document.createElement("p");
+      messageEl.textContent = message;
+      messageEl.style.fontSize = "1.5rem";
+      messageEl.style.color = "#ffb347";
+      messageEl.style.margin = "0 0 1.5rem 0";
+      
+      // Create close button
+      const closeBtn = document.createElement("button");
+      closeBtn.textContent = "OK";
+      closeBtn.style.padding = "0.5rem 2rem";
+      closeBtn.style.backgroundColor = "#ffb347";
+      closeBtn.style.color = "#0e1e25";
+      closeBtn.style.border = "none";
+      closeBtn.style.borderRadius = "5px";
+      closeBtn.style.cursor = "pointer";
+      closeBtn.style.fontWeight = "bold";
+      closeBtn.style.fontSize = "1rem";
+      
+      closeBtn.addEventListener("click", () => {
+        document.body.removeChild(popup);
+      });
+      
+      // Add elements to popup
+      popup.appendChild(messageEl);
+      popup.appendChild(closeBtn);
+      
+      // Add popup to body
+      document.body.appendChild(popup);
+      
+      // Create keyframe animation for popup appearance
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes popupAppear {
+          from { opacity: 0; transform: translate(-50%, -60%); }
+          to { opacity: 1; transform: translate(-50%, -50%); }
+        }
+      `;
+      document.head.appendChild(style);
     }
   
     function updateCountdown() {
       const now = Date.now();
       const elapsed = Math.floor((now - startTime) / 1000);
-      const timeLeft = TOTAL_TIME - elapsed;
+      let timeLeft = TOTAL_TIME - elapsed;
   
-      if (timeLeft > 0) {
-        const hours = Math.floor(timeLeft / 3600);
-        const minutes = Math.floor((timeLeft % 3600) / 60);
-        const seconds = Math.floor(timeLeft % 60);
-  
-        countdownElement.textContent =
-          `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-      } else {
+      // Check if time is up and extension hasn't been added yet
+      if (timeLeft <= 0 && !extensionAdded) {
+        // Add extension time
+        localStorage.setItem("frontend-faceoff-start-time", Date.now() - (TOTAL_TIME - EXTENSION_TIME) * 1000);
+        localStorage.setItem("extension-added", "true");
+        extensionAdded = true;
+        
+        // Show popup
+        createPopup("Extra Time Added: 20 Minutes! Good luck!");
+        
+        // Update timeLeft with extension
+        timeLeft = EXTENSION_TIME;
+        
+        // Reset any "time's up" styling
+        countdownElement.classList.remove("times-up");
+      }
+      // Final time's up
+      else if (timeLeft <= 0 && extensionAdded) {
         countdownElement.textContent = "Time's Up!";
         countdownElement.classList.add("times-up");
         clearInterval(timer);
+        return;
       }
+  
+      const hours = Math.floor(timeLeft / 3600);
+      const minutes = Math.floor((timeLeft % 3600) / 60);
+      const seconds = Math.floor(timeLeft % 60);
+  
+      countdownElement.textContent =
+        `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
     }
   
     updateCountdown(); // initial call

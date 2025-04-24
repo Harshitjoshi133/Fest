@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frontend Face-Off</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header>
+        <h1>Frontend Face-Off</h1>
+        <p>Organized by Coding Club | 25th April | Birla Institute of Applied Sciences</p>
+        
+        <!-- Logo Section -->
+        <section class="logo-section">
+          <div class="logo-container">
+            <img src="images/Birla_Institute_of_Applied_Sciences_logo.jpg" alt="Birla Institute of Applied Sciences Logo" class="logo left" />
+            <img src="images/cclogo.jpg" alt="Coding Club Logo" class="logo right" />
+          </div>
+        </section>
+      </header>
+      
+      
+  
+  <section class="section">
+    <h2>⏱️ Countdown Timer</h2>
+    <p>The challenge ends in: <span id="countdown" style="font-weight: bold; color: #ffb347;"></span></p>
+  </section>
+  
+  <section class="section">
+    <h2>🚀 Event Description</h2>
+    <p>Hey there, frontend warriors! 👨‍💻👩‍💻 Get ready to put your skills to the test in our Frontend Face-Off – a high-energy showdown where design meets code, and creativity meets performance. Organized by Coding Club, this event is your chance to compete, collaborate, and show off your frontend finesse!</p>
+    <p>Whether you're a seasoned frontend dev or just getting started, this is your moment to shine. Fill out the form below to register and join the face-off! Let the best frontend dev win! 💪💻</p>
+  </section>
+  <section class="section">
+    <h2>🧠 Beginner Problem Statement: Local Food Finder UI</h2>
+    <p>Design a homepage UI for a fictional food delivery service called <strong>LocalFoodie</strong> that helps users find local cuisine.</p>
+    <p>The design should be clean, intuitive, and user-friendly. Static data can be used; no API required.</p>
+    
+    <h3>✅ Checklist / Features to Implement (10 Checkpoints)</h3>
+    <ol>
+      <li><strong>Header Section with Branding:</strong> Logo or app name, and nav links (Home, Explore, Contact)</li>
+      <li><strong>Hero Section:</strong> Tagline (e.g., "Discover the taste of your neighborhood!") with a CTA like “Explore Now.”</li>
+      <li><strong>Search Bar:</strong> Search for food or restaurants (bonus: city/area filtering)</li>
+      <li><strong>Cuisine Categories:</strong> Popular cuisines shown as clickable cards</li>
+      <li><strong>Sorting Feature:</strong> Sort by rating, price, delivery time</li>
+      <li><strong>Responsive Design:</strong> Should work on mobile, tablet, and desktop</li>
+      <li><strong>Dark/Light Mode Toggle (Bonus):</strong> Toggle for switching themes</li>
+      <li><strong>Footer Section:</strong> Social links, contact info, small About section</li>
+      <li><strong>Search Filter Results (Optional Bonus):</strong> Filter cards by category or search input</li>
+      <li><strong>Favorites Feature (Bonus):</strong> Users can mark restaurants as favorites using a heart icon or button</li>
+    </ol>
+    <p><strong>Tech Stack Allowed:</strong> HTML, CSS, JavaScript (Vanilla or frameworks like React, Vue.js, Svelte, or Astro). Tailwind CSS / Bootstrap are optional. No backend or API needed.</p>
+  </section>
+  
+  <section class="section">
+    <h2>📜 Rules & Regulations</h2>
+    <ol>
+      <li>Individual or team participation (max 3 members)</li>
+      <li>Only frontend tools allowed: HTML, CSS, JavaScript (React, Tailwind allowed)</li>
+      <li>Time limit: 120 minutes</li>
+      <li>Use of AI (e.g. ChatGPT, Copilot) is allowed</li>
+      <li>Use of GitHub is not allowed during the competition</li>
+      <li>No use of pre-made templates</li>
+      <li>Documentation must be submitted along with the project explaining the components and approach</li>
+      <li>You can bring your own laptops; if unavailable, you may use the computer lab systems provided</li>
+      <li>After the event, the submitted GitHub repository must be made public</li>
+    </ol>
+  </section>
+  
+  <section class="section">
+    <h2>📊 Scoring System</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Criteria</th>
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Design Accuracy</td><td>25</td></tr>
+        <tr><td>Responsiveness</td><td>20</td></tr>
+        <tr><td>Code Quality</td><td>20</td></tr>
+        <tr><td>Functionality</td><td>15</td></tr>
+        <tr><td>Innovation / Creativity</td><td>10</td></tr>
+        <tr><td>Performance Optimization</td><td>10</td></tr>
+        <tr><th>Total</th><th>100</th></tr>
+      </tbody>
+    </table>
+  </section>
+  <section class="section">
+    <h2>🚀 Bonus: Deployment Guidelines</h2>
+    <p>Participants can earn <strong>bonus points</strong> by deploying their frontend project live and submitting the hosted URL along with their documentation.</p>
+  
+    <h3>✨ Deployment Options:</h3>
+    <ul>
+      <li><strong>Netlify:</strong> Drag-and-drop your build folder or connect your Git repo</li>
+      <li><strong>Vercel:</strong> Great for React-based apps, quick Git integration</li>
+      <li><strong>GitHub Pages:</strong> Use for static HTML/CSS/JS projects</li>
+    </ul>
+  
+    <h3>📋 Submission Tip:</h3>
+    <p>Include the live deployment link in your documentation and mention any deployment challenges you faced.</p>
+  
+    <p style="font-style: italic; color: #ffb347;">Bonus Points will be awarded based on successful deployment and accessibility of the app.</p>
+  </section>
+  
+  <footer>
+    <p>&copy; 2025 Coding Club, Birla Institute of Applied Sciences</p>
+  </footer>
+</body>
+<script>
+    const countdownElement = document.getElementById("countdown");
+    const TOTAL_TIME = 2 * 60 * 60; // 2.5 hours = 9000 seconds (adjust if needed)
+  
+    let startTime = localStorage.getItem("frontend-faceoff-start-time");
+  
+    if (!startTime) {
+      startTime = Date.now();
+      localStorage.setItem("frontend-faceoff-start-time", startTime);
+    }
+  
+    function updateCountdown() {
+      const now = Date.now();
+      const elapsed = Math.floor((now - startTime) / 1000);
+      const timeLeft = TOTAL_TIME - elapsed;
+  
+      if (timeLeft > 0) {
+        const hours = Math.floor(timeLeft / 3600);
+        const minutes = Math.floor((timeLeft % 3600) / 60);
+        const seconds = Math.floor(timeLeft % 60);
+  
+        countdownElement.textContent =
+          `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      } else {
+        countdownElement.textContent = "Time's Up!";
+        clearInterval(timer);
+      }
+    }
+  
+    updateCountdown(); // initial call
+    const timer = setInterval(updateCountdown, 1000);
+</script>
+</html>

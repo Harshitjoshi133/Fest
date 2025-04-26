@@ -86,6 +86,55 @@
       </tbody>
     </table>
   </section>
+  
+  <section class="section quiz-section">
+    <h2>🎯 TECH QUIZ Event</h2>
+    <div class="quiz-content">
+      <div class="quiz-info">
+        <h3>Are you ready to put your tech knowledge to the ultimate test?</h3>
+        <p>The Coding Club of Birla Institute of Applied Sciences proudly presents the <span class="highlight">TECH QUIZ</span> – a thrilling challenge where brains meet bytes!</p>
+        
+        <div class="quiz-details">
+          <div class="quiz-detail">
+            <span class="detail-icon">📍</span>
+            <span class="detail-text">Venue: Mini-Audi</span>
+          </div>
+          <div class="quiz-detail">
+            <span class="detail-icon">👥</span>
+            <span class="detail-text">Team Size: 3 students</span>
+          </div>
+        </div>
+        
+        <p class="quiz-tagline">Showcase your skills, outsmart your peers, and win exciting prizes! Whether you're a coding champ, a tech trivia wizard, or just love quizzes – this is your stage to shine✨</p>
+      </div>
+      
+      <div class="quiz-categories">
+        <div class="category">
+          <div class="category-icon">💻</div>
+          <div class="category-name">Programming</div>
+        </div>
+        <div class="category">
+          <div class="category-icon">🌐</div>
+          <div class="category-name">Web Tech</div>
+        </div>
+        <div class="category">
+          <div class="category-icon">🤖</div>
+          <div class="category-name">AI & ML</div>
+        </div>
+        <div class="category">
+          <div class="category-icon">📱</div>
+          <div class="category-name">Mobile Dev</div>
+        </div>
+        <div class="category">
+          <div class="category-icon">🔐</div>
+          <div class="category-name">Cyber Security</div>
+        </div>
+      </div>
+      
+      <button class="register-btn">Register Now</button>
+    </div>
+  </section>
+  
   <section class="section">
     <h2>🚀 Bonus: Deployment Guidelines</h2>
     <p>Participants can earn <strong>bonus points</strong> by deploying their frontend project live and submitting the hosted URL along with their documentation.</p>
@@ -217,5 +266,26 @@
   
     updateCountdown(); // initial call
     const timer = setInterval(updateCountdown, 1000);
+
+    // Quiz section interactions
+    document.addEventListener('DOMContentLoaded', function() {
+      const registerBtn = document.querySelector('.register-btn');
+      if (registerBtn) {
+        registerBtn.addEventListener('click', function() {
+          createPopup("Registration for the Tech Quiz is now open! Please contact the Coding Club members to register your team.");
+        });
+      }
+
+      // Add hover effects to categories
+      const categories = document.querySelectorAll('.category');
+      categories.forEach(category => {
+        category.addEventListener('mouseenter', function() {
+          this.querySelector('.category-icon').style.animation = 'none';
+          setTimeout(() => {
+            this.querySelector('.category-icon').style.animation = 'floatIcon 2s infinite ease-in-out';
+          }, 10);
+        });
+      });
+    });
 </script>
 </html>
